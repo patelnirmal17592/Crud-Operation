@@ -19,13 +19,19 @@ namespace Crud_Operation.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRecord(CreateRecordRequest request)
         {
+            CreateRecordResponse response = null;
+
             try
             {
-
-            } catch(Exception ex)
+                response = await _crudOperationSL.CreateRecord(request);
+            } 
+            catch(Exception ex)
             {
-
+                response.IsSuccess = false;
+                response.Message = ex.Message;
             }
+
+            return Ok(response);
             
         }
     }
