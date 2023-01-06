@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Crud_Operation.CommonLayer.Model;
+using Crud_Operation.ServiceLayer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Crud_Operation.Controllers
@@ -7,5 +9,24 @@ namespace Crud_Operation.Controllers
     [ApiController]
     public class CrudOperationController : ControllerBase
     {
+
+        public readonly ICrudOperationSL _crudOperationSL;
+        public CrudOperationController(ICrudOperationSL crudOperationSL)
+        {
+            _crudOperationSL = crudOperationSL;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRecord(CreateRecordRequest request)
+        {
+            try
+            {
+
+            } catch(Exception ex)
+            {
+
+            }
+            
+        }
     }
 }
