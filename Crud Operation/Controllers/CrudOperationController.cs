@@ -17,6 +17,7 @@ namespace Crud_Operation.Controllers
         }
 
         [HttpPost]
+        [Route("CreateRecord")]
         public async Task<IActionResult> CreateRecord(CreateRecordRequest request)
         {
             CreateRecordResponse response = null;
@@ -33,6 +34,21 @@ namespace Crud_Operation.Controllers
 
             return Ok(response);
             
+        }
+
+        [HttpGet]
+
+        public async Task<IActionResult> ReadRecord()
+        {
+            ReadRecordResponse response = null;
+            try
+            {
+
+            } catch(Exception ex)
+            {
+
+            }
+            return Ok(response);
         }
     }
 }

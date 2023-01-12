@@ -49,5 +49,43 @@ namespace Crud_Operation.RepositoryLayer
 
             return response;
         }
+
+        public async Task<ReadRecordResponse> ReadRecord()
+        {
+            ReadRecordResponse response = new ReadRecordResponse();
+            response.IsSuccess = true;
+            response.Message = "Successful";
+            try
+            {
+                string SqlQuery = "Select UserName, Age CrudOperationTable;";
+                using(SqlCommand sqlCommand = new SqlCommand(SqlQuery, _sqlConnection))
+                {
+                    sqlCommand.CommandType = System.Data.CommandType.Text;
+                    sqlCommand.CommandTimeout = 180;
+                    _sqlConnection.Open();
+                    using(SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync())
+                    {
+                        if(sqlDataReader.HasRows)
+                        {
+                            response.readRecordData = new List<ReadRecordData>();
+
+                            while (await sqlDataReader.ReadAsync())
+                            {
+                                ReadRecordData dbData = new ReadRecordData();
+                                dbData.UserName = sqlDataReader["UserName"] != DBNull.Value ? sqlDataReader["UserName"].ToString() : string.Empty;
+                                dbData.Age = sqlDataReader["Age"] != DBNull.Value ? Convert.ToInt32(sqlDataReader["Age"]) : 0;
+                                response.readRecordData.Add(dbData);
+                            }
+                        }
+                    }
+                }
+            } catch (Exception ex)
+            {
+
+            } finally
+            {
+
+            }
+        }
     }
 }

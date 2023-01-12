@@ -16,5 +16,10 @@ namespace Crud_Operation.ServiceLayer
         {
             return await _crudOperationRL.CreateRecord(request);
         }
+
+        public async Task<ReadRecordResponse> ReadRecord()
+        {
+            return await _crudOperationRL.ReadRecord();
+        }
     }
 }
